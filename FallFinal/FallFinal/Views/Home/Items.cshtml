@@ -1,0 +1,27 @@
+﻿@model IEnumerable<FallFinal.Models.Item>
+
+@{
+    ViewBag.Title = "Items";
+}
+
+<div class="jumbotron">
+    <h1>Item Inventory</h1>
+</div>
+
+<h2>Feel free to browse our items. Select an Item if you wish to know more about it and to place a bid. <br /> <br /></h2>
+
+@foreach(var items in Model.ToList())
+{
+    var name = @Html.ValueForModel(items.I_Name);
+    <h4>@Html.ActionLink(name.ToHtmlString(), "/Details/" + items.I_ID) Is up for auction by <em> @Html.ValueForModel(items.Seller.Seller_Name)</em> 
+    
+        @Html.ActionLink("Edit", "/Edit/" + items.I_ID)
+        @Html.ActionLink("Delete", "/Delete/" + items.I_ID)
+    <br /><br />
+    </h4>
+}
+
+<br /> <br />
+<h2>Have an Item to sell? @Html.ActionLink("Add an ITEM!","/CreateItem/")</h2>
+
+
