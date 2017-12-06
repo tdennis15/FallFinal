@@ -1,0 +1,29 @@
+﻿@model FallFinal_2.Models.Movie
+
+@{
+    ViewBag.Title = "MovieEdit";
+}
+<div class="jumbotron">
+    <h2>MovieEdit</h2>
+</div>
+
+<form method="post">
+    <display for="Movie Name">Movie Name</display>
+    <input type="text" name="movieName" id="movieName" title="Movie Name" value="@(ViewBag.mName == null ? "" : ViewBag.mName)" maxlength="50" />
+    <br /> <br />
+
+    <display for="Movie Director">Movie Director</display>
+    <input type="text" name="dirName" id="dirName" title="Director Name" value="@(ViewBag.mDir == null ? "" : ViewBag.mDir)" maxlength="50" />
+    <br /> <br />
+
+    <display for="Movie Year">Movie Year</display>
+    <input type="number" name="year" id="year" title="Movie Year" value="@(ViewBag.mYear == null ? "" : ViewBag.mYear)" min="1912" max="2018" />
+    <br /> <br />
+    <input type="submit" value="Update" />
+</form>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Movie")
+</div>

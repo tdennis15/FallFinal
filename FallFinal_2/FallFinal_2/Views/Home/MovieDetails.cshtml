@@ -1,0 +1,43 @@
+﻿@model FallFinal_2.Models.Movie
+
+@{
+    ViewBag.Title = "MovieDetails";
+}
+<div class="jumbotron">
+    <h2>Movie Details</h2>
+</div>
+
+
+<div>
+    <h4>@Html.DisplayFor(model => model.M_Name)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+        <b>Director</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Director.D_Name)
+        </dd>
+        <dt>
+            <b>Movie Name</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.M_Name)
+        </dd>
+
+        <dt>
+           <b>Year Released</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.M_Year)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "MovieEdit", new { id = Model.M_ID }) |
+    @Html.ActionLink("Back to List", "Movie")
+</p>

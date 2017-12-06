@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FallFinal_2.Models.Movie>
+
+@{
+    ViewBag.Title = "Movie";
+}
+<div class="jumbotron">
+    <h2>
+        Movie
+    </h2></div>
+
+
+<p>
+    @Html.ActionLink("Create New", "MovieCreate")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            <b>Movie</b>
+        </th>
+        <th>
+            <b>Director</b>
+        </th>
+        <th>
+           <b>Year Released</b>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.M_Name)
+        
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director1.D_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.M_Year)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "MovieEdit", new { id=item.M_ID }) |
+            @Html.ActionLink("Details", "MovieDetails", new { id=item.M_ID }) |
+            @Html.ActionLink("Delete", "MovieDelete", new { id=item.M_ID })
+        </td>
+    </tr>
+}
+
+</table>

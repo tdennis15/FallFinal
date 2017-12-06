@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FallFinal_2.Models.Actor>
+
+@{
+    ViewBag.Title = "Actor";
+}
+<div class="jumbotron">
+    <h2>Actor List</h2>
+</div>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+           <b>Actor Name</b>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.A_Name)
+        </td>
+       
+    </tr>
+}
+
+</table>
