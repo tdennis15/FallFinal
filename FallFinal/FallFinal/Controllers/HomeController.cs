@@ -32,7 +32,8 @@ namespace FallFinal.Controllers
         [HttpGet]
         public ActionResult CreateItem()
         {
-            return View();
+            var itema = db.Items;
+            return View(itema);
         }
 
         /// <summary>
@@ -52,13 +53,108 @@ namespace FallFinal.Controllers
                 Item item = db.Items.Create();
 
                 item.I_Name = collection["itemName"];
-                return RedirectToAction("Index");
+                item.Seller.Seller_Name = collection["sellerName"];
+                item.I_Description = collection["itemDescription"];
+
+                db.Items.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("Items");
             }
 
             catch
             {
-                return View("Index");
+                return View("Items");
             }
         }
-    }
+
+
+        // GET: Details about an item 
+        public ActionResult Details(int id)
+        {
+            var artist = db.Items.Where(a => a.I_ID == id).FirstOrDefault();
+            return View(artist);
+        }
+
+
+        // GET: Edit Item Details
+        public ActionResult Edit(int id)
+        {
+            ViewBag.aName = db.Items.Where(a => a.I_ID == id).FirstOrDefault().I_Name;
+            ViewBag.aDescription = db.Items.Where(a => a.I_ID == id).FirstOrDefault().I_Description;
+            
+            return View();
+        }
+
+        // POST: Update the database with the posted details
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                var ItemToUpdate = db.Items.Find(id);
+
+               ItemToUpdate.I_Name = collection["Name"];
+               ItemToUpdate.I_Description = collection["Description"];
+
+
+                db.SaveChanges();
+
+                return RedirectToAction("Details/" + id);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Form to delete an artist
+        public ActionResult Delete(int id)
+        {
+            var artist = db.Items.Where(a => a.I_ID == id).FirstOrDefault();
+
+            //viewbags so that we can populate the fields in our edit field so that data that wont be changed
+            // doesnt have to be retyped
+            ViewBag.aName = db.Items.Where(a => a.I_ID == id).FirstOrDefault().I_Name;
+            ViewBag.aDescription = db.Items.Where(a => a.I_ID == id).FirstOrDefault().I_Description;
+           
+
+            return View("Items");
+        }
+
+        // POST: Deleting the artist from DB
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Items.Find(id);
+
+                db.Items.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Artists");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public JsonResult BidResult(int? id)
+        {
+            //data checking for sanity
+            if (id == null)
+            {
+                return null;
+            }
+
+            //our JSON object that will be returned
+            var bid = db.Bids.Where(g => g.Item_ID == id) //getting the Item from the ID
+                              .ToList(); //return it as a list type instead of an enumerable.
+            return Json(bid, JsonRequestBehavior.AllowGet); //return the object to the CustomJS.js JavaAJAX_Call function.
+        }
+
+    
+}
 }

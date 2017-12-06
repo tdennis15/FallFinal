@@ -4,6 +4,11 @@
     ViewBag.Title = "Items";
 }
 
+@section Javascript{
+    <script type="text/javascript" src="~/Scripts/Custom.js"></script>
+
+}
+
 <div class="jumbotron">
     <h1>Item Inventory</h1>
 </div>
@@ -12,13 +17,18 @@
 
 @foreach(var items in Model.ToList())
 {
+
+
     var name = @Html.ValueForModel(items.I_Name);
     <h4>@Html.ActionLink(name.ToHtmlString(), "/Details/" + items.I_ID) Is up for auction by <em> @Html.ValueForModel(items.Seller.Seller_Name)</em> 
+    <button onclick="JavaAjax('@items.I_ID');">Refresh Bid Data</button>
     
         @Html.ActionLink("Edit", "/Edit/" + items.I_ID)
         @Html.ActionLink("Delete", "/Delete/" + items.I_ID)
-    <br /><br />
+   
     </h4>
+    <div id="bid"></div>
+    <br /> <br />
 }
 
 <br /> <br />

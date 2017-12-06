@@ -1,0 +1,43 @@
+﻿@model FallFinal.Models.Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>View the details of an Item </h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+           <b>Seller Name </b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seller1.Seller_Name)
+        </dd>
+
+        <dt>
+           <b>Item Name</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Name)
+        </dd>
+
+        <dt>
+           <b>Item Description</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.I_ID }) |
+    @Html.ActionLink("Back to List", "Items")
+</p>
