@@ -13,7 +13,8 @@ namespace FallFinal_2.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var movie = db.Movies;
+            return View(movie);
         }
 
        public ActionResult Movie()
@@ -123,6 +124,25 @@ namespace FallFinal_2.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public JsonResult MovieResult(int? id)
+        {
+            //data checking for sanity
+            if (id == null)
+            {
+                return null;
+            }
+
+            //our JSON object that will be returned
+            var actors = db.Casts.Where(a => a.C_MovieID == id)
+                .Select(x => x.Actor)
+                .Select(x => new { x.A_Name })
+                .OrderBy(x => x.A_Name)
+                .ToList();
+
+            return Json(actors, JsonRequestBehavior.AllowGet); //return the object to the CustomJS.js JavaAJAX_Call function.
         }
     }
 }

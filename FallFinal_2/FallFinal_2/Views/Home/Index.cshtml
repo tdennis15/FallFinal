@@ -14,10 +14,17 @@
 
 
 <h3>Would you like to see what movies each actor is in? Select a button below to display that!</h3>
-
-
-
 <br />
-<br />
-<div id="landing_zone"></div>
+<div class="row">
+    @foreach (var item in Model.ToList())
+    {
+        <div class="col-md-4">
+            <button onclick="JavaAJAX('@item.M_ID');">@item.M_Name</button>
+        </div>
+    }
+    </div>
+
+    <br />
+    <br />
+    <div id="landing_zone"></div>
 
