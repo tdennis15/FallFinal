@@ -31,14 +31,14 @@
     <tr>
 
         <td>
-            @Html.DisplayFor(modelItem => item.M_Name)
+            @Html.DisplayFor(a => item.M_Name)
         
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Director1.D_Name)
+            @Html.DisplayFor(b => item.Director1.D_Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.M_Year)
+            @Html.DisplayFor(c => item.M_Year)
         </td>
         <td>
             @Html.ActionLink("Edit", "MovieEdit", new { id=item.M_ID }) |

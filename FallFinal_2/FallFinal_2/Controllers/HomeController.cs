@@ -13,25 +13,25 @@ namespace FallFinal_2.Controllers
 
         public ActionResult Index()
         {
-            var movie = db.Movies;
+            var movie = db.Movies.ToList();
             return View(movie);
         }
 
        public ActionResult Movie()
         {
-            var movie = db.Movies;
+            var movie = db.Movies.ToList();
             return View(movie);
         }
 
        public ActionResult Actor()
         {
-            var actor = db.Actors;
+            var actor = db.Actors.ToList();
             return View(actor);
         }
 
        public ActionResult Cast()
         {
-            var cast = db.Casts;
+            var cast = db.Casts.ToList();
             return View(cast);
         }
 
